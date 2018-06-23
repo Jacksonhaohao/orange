@@ -10,6 +10,13 @@ import './assets/fonts/iconfont.css'
 // 引入axios
 import axios from 'axios'
 
+// 为axios挂载token请求头,需要使用request拦截器实现
+axios.interceptors.request.use(function (config) {
+  // 手动为axios的请求,追加 Authorization 请求头
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+
 // 设置axios的根目录
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 // 挂载axios
